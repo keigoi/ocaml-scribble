@@ -2,7 +2,6 @@ OASISFormat: 0.4
 Name:        oscribble
 LICENSE:     PROP
 Version:     0.1-plus
-Homepage:    http://www.ct.info.gifu-u.ac.jp/~keigoi/session-ocaml/
 Synopsis:    A concurrent / distributed programming with protocol typing,
   based on Session Types.
 Authors:     Pierre-Malo Deniélou
