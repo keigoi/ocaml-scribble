@@ -25,7 +25,7 @@ let get_string = flush_str_formatter
 (* Pretty-printing for abstract syntax *)
 (***************************************)
 
-open Syntax
+open ScribbleSyntax
 
 let print_message_sig (op,lp) =
   let rec aux = function

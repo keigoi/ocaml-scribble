@@ -3,7 +3,7 @@
 (****************************************************)
 (* $Time-stamp: <Malo - 2012>$ *)
 
-open Syntax
+open ScribbleSyntax
 
 (* Nodes *)
 

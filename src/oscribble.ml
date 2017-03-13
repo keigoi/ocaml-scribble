@@ -110,15 +110,15 @@ let main () =
   let sessionast = Scribble.parse_file (List.hd file_list) in
   let () = debug ("Protocol parsed:\n"^(Prettyprint.print_ast sessionast))
   in
-  let (imports,protocols) = match sessionast with Syntax.FileAS (im,pr) -> (im,pr)
+  let (imports,protocols) = match sessionast with ScribbleSyntax.FileAS (im,pr) -> (im,pr)
   in
   let ast = match !protocol with
       None -> List.hd (List.rev protocols)
     | Some n -> (
       try (
         List.find (function x -> match x with
-          | Syntax.Globalast (name,params,role_list,protocol_body)-> name=n
-          | Syntax.Localast (name,_,params,role_list,protocol_body)-> name=n)
+          | ScribbleSyntax.Globalast (name,params,role_list,protocol_body)-> name=n
+          | ScribbleSyntax.Localast (name,_,params,role_list,protocol_body)-> name=n)
           protocols
       ) with Not_found -> 
         (prerr_string ("No protocol named "^n^" has been found.\n");
@@ -126,9 +126,9 @@ let main () =
   in
   (match ast,!action with
     | (ast), Some Parse ->
-      (*      Syntax.Globalast (name,params,role_list,protocol_body)) *)
+      (*      ScribbleSyntax.Globalast (name,params,role_list,protocol_body)) *)
       ()
-    | (Syntax.Globalast (name,params,role_list,protocol_body)), Some Check ->
+    | (ScribbleSyntax.Globalast (name,params,role_list,protocol_body)), Some Check ->
       let g = Conversation.global_conversion protocol_body in
       let () = fulldebug ("Global type:\n"^(Prettyprint.print_globaltype g))
       in
@@ -136,7 +136,7 @@ let main () =
       let () = debug ("Wellformed: "^(string_of_bool wf))
       in         
       ()
-    | (Syntax.Globalast (name,params,role_list,protocol_body)), Some (Project role) ->
+    | (ScribbleSyntax.Globalast (name,params,role_list,protocol_body)), Some (Project role) ->
       let g = Conversation.global_conversion protocol_body in
       let () = fulldebug ("Global type:\n"^(Prettyprint.print_globaltype g))
       in
@@ -150,8 +150,8 @@ let main () =
       let t  = Conversation.localnodetoAST tc in
       let () = debug ("Local type:") in
       (print_string (Prettyprint.print_ast 
-                       (Syntax.FileAS ([],[Syntax.Localast (name,role,params,role_list,t)]))^"\n"))
-    | (Syntax.Localast (name,role,params,role_list,protocol_body)), Some Check ->
+                       (ScribbleSyntax.FileAS ([],[ScribbleSyntax.Localast (name,role,params,role_list,t)]))^"\n"))
+    | (ScribbleSyntax.Localast (name,role,params,role_list,protocol_body)), Some Check ->
       let t = Conversation.local_conversion protocol_body in
       let () = debug ("Local type:\n"^(Prettyprint.print_localtype t)) in
       ()

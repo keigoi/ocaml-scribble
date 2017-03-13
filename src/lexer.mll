@@ -5,7 +5,7 @@
 (* $Time-stamp: <Malo - 2012>$ *)
 
 open Common
-open Syntax
+open ScribbleSyntax
 open Parser
 
 module LE = Lexing

@@ -4,7 +4,7 @@
 (********************************************************************)
 (* $Time-stamp: <Malo - 2012>$ *)
 
-  open Syntax
+  open ScribbleSyntax
   open Lexing
 
   let debug = Common.fulldebug "Parser"
@@ -37,7 +37,7 @@
 %token <Common.info> LPA RPA LCB RCB LAB RAB
 
 %start scribblefile
-%type <Syntax.ast> scribblefile
+%type <ScribbleSyntax.ast> scribblefile
 
 %%
 

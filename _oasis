@@ -12,7 +12,7 @@ Library scribble
   Path:       src
   BuildTools: ocamlbuild
   Modules:
-    Scribble, Syntax
+    Scribble, ScribbleSyntax
   InternalModules:
     Common, Conversation, Lexer, Parser, Prettyprint, Projection, Version, Wellformedness
 
