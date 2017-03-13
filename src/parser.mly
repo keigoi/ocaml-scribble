@@ -13,8 +13,8 @@
     debug ("Error: "^t) ;
     let (l,c1),(_,c2) = info in
     let s = Printf.sprintf "%d:%d-%d" l c1 c2 in
-    if t = "" then raise (Common.Parse_error (s,info))
-    else raise (Common.Parse_error ((*s^ ": " ^ *)t,info))
+    if t = "" then raise (ScribbleSyntax.Parse_error (s,info))
+    else raise (ScribbleSyntax.Parse_error ((*s^ ": " ^ *)t,info))
 
   let parse_error _ =
     let start_pos = Parsing.symbol_start_pos () in
@@ -23,18 +23,18 @@
       (start_pos.pos_lnum,start_pos.pos_bol),(end_pos.pos_lnum,end_pos.pos_bol)
     in
 (*    let s = Printf.sprintf "%d:%d-%d" l1 c1 c2 in*)
-    raise (Common.Parse_error ("",((l1,c1),(l2,c2))))
+    raise (ScribbleSyntax.Parse_error ("",((l1,c1),(l2,c2))))
 
 %}
 
-%token <Common.info> AND AS AT BY CHOICE CONTINUE FROM INTERRUPTIBLE
-%token <Common.info> GLOBAL LOCAL OR PACKAGE PAR 
-%token <Common.info> PROTOCOL REC ROLE SIG TO WITH
-%token <Common.info> EOF
-%token <Common.info * string> IDENTIFIER DIGOPERATOR
-%token <Common.info * string> IMPORT
-%token <Common.info> SEMI EQUAL COLON COMMA
-%token <Common.info> LPA RPA LCB RCB LAB RAB
+%token <ScribbleSyntax.info> AND AS AT BY CHOICE CONTINUE FROM INTERRUPTIBLE
+%token <ScribbleSyntax.info> GLOBAL LOCAL OR PACKAGE PAR 
+%token <ScribbleSyntax.info> PROTOCOL REC ROLE SIG TO WITH
+%token <ScribbleSyntax.info> EOF
+%token <ScribbleSyntax.info * string> IDENTIFIER DIGOPERATOR
+%token <ScribbleSyntax.info * string> IMPORT
+%token <ScribbleSyntax.info> SEMI EQUAL COLON COMMA
+%token <ScribbleSyntax.info> LPA RPA LCB RCB LAB RAB
 
 %start scribblefile
 %type <ScribbleSyntax.ast> scribblefile

@@ -18,10 +18,10 @@ let parse_string str =
       try 
            Parser.scribblefile Lexer.token lexbuf
          with
-             Common.Syntax_error (s,i) ->
+             ScribbleSyntax.Syntax_error (s,i) ->
 	       (prerr_string ("Syntax error: "^s^" "^(Common.info_to_string i)^"\n");
                 exit 1)
-           | Common.Parse_error (s,i)  ->
+           | ScribbleSyntax.Parse_error (s,i)  ->
 	     (prerr_string ("Parsing error: "^s^" "^(Common.info_to_string i)^"\n"); 
               exit 2)
                     

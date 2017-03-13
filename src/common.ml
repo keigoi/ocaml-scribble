@@ -28,11 +28,6 @@ let fulldebug modul msg =
 let switch_debug_on () = debug_var := true
 let switch_fulldebug_on () = debug_var := true;fulldebug_var := true
 
-(* Positionning *)
-
-type pos = int * int
-type info = pos * pos
-
 let bogusInfo = ((0,0),(0,0))
 
 let info_to_string ((l1,c1),(l2,c2)) =
@@ -55,9 +50,4 @@ let alias subst =
 let rec re_alias subst = function n ->
   let m = alias subst n in
   if n = m then m else re_alias subst m
-
-
-(* Errors *)
-exception Syntax_error of string*info
-exception Parse_error of string*info
 

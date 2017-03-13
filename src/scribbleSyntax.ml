@@ -3,8 +3,14 @@
 (********************************************************************)
 (* $Time-stamp: <Malo - 2012>$ *)
 
+(* Positionning *)
 
-open Common
+type pos = int * int
+type info = pos * pos
+
+(* Errors *)
+exception Syntax_error of string*info
+exception Parse_error of string*info
 
 (************************************)
 (* Abstract syntax for source files *)
