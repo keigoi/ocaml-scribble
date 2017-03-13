@@ -1,9 +1,8 @@
 OASISFormat: 0.4
-Name:        oscribble
+Name:        ocaml-scribble
 LICENSE:     PROP
 Version:     0.1-plus
-Synopsis:    A concurrent / distributed programming with protocol typing,
-  based on Session Types.
+Synopsis:    Ocaml-scribble is an implementation in Ocaml of the Scribble tools suite.
 Authors:     Pierre-Malo Deniélou
 Plugins:     META (0.4)
 

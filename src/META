@@ -1,8 +1,8 @@
 # OASIS_START
-# DO NOT EDIT (digest: e13b015060e7fbf32fde18e315875b7c)
+# DO NOT EDIT (digest: feec718a347356fa0b44cb4eefafa568)
 version = "0.1-plus"
 description =
-"A concurrent / distributed programming with protocol typing, based on Session Types."
+"Ocaml-scribble is an implementation in Ocaml of the Scribble tools suite."
 archive(byte) = "scribble.cma"
 archive(byte, plugin) = "scribble.cma"
 archive(native) = "scribble.cmxa"
