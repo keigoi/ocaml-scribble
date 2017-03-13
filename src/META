@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: e13b015060e7fbf32fde18e315875b7c)
+version = "0.1-plus"
+description =
+"A concurrent / distributed programming with protocol typing, based on Session Types."
+archive(byte) = "scribble.cma"
+archive(byte, plugin) = "scribble.cma"
+archive(native) = "scribble.cmxa"
+archive(native, plugin) = "scribble.cmxs"
+exists_if = "scribble.cma"
+# OASIS_STOP
+

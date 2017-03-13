@@ -1,0 +1,22 @@
+# OASIS_START
+# DO NOT EDIT (digest: d0ec8b8f2c9d2e9881847323bdc53507)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library scribble
+"src/scribble.cmxs": use_scribble
+# Executable oscribble
+<src/oscribble.{native,byte}>: use_scribble
+<src/*.ml{,i,y}>: use_scribble
+# OASIS_STOP

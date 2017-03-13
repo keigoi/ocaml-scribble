@@ -82,43 +82,6 @@ let speclist = Arg.align
      " followed by NAME, specifies which protocol the action refers to");
   ]
  
-(* File reading and parsing *)
-
-let rec parse_until_end chan accum = 
-  try 
-    let s = input_char chan in
-    if s = '\r' then assert false 
-    else
-      (parse_until_end chan (accum^(String.make 1 s)))
-  with End_of_file -> accum
-
-(* Parse the files entered as arguments *)
-let parse_files file_list =
-  List.map 
-    (function file ->
-      let chan = open_in file in
-      let raw_scribble = parse_until_end chan "" in
-      fulldebug ("File "^file^" reads: \n"^raw_scribble) ;
-      debug "Compilation starting" ;
-      let lexbuf = Lexing.from_string raw_scribble in
-      debug "Lexer built" ;
-      let sessionast =
-        (try 
-           Parser.scribblefile Lexer.token lexbuf
-         with
-             Common.Syntax_error (s,i) ->
-	       (prerr_string ("Syntax error: "^s^" "^(Common.info_to_string i)^"\n");
-                exit 1)
-           | Common.Parse_error (s,i)  ->
-	     (prerr_string ("Parsing error: "^s^" "^(Common.info_to_string i)^"\n"); 
-              exit 2)
-        ) in
-      let () = close_in chan in
-      let () = debug ("Protocols from file "^file^" parsed:\n"^(Prettyprint.print_ast sessionast))
-      in
-      (file,sessionast)
-    )
-    file_list
 
 
 
@@ -144,8 +107,7 @@ let main () =
                   "No scribble file is present as argument\n");
              exit 1)
     | fl -> fl in
-  let sessionast_list = parse_files file_list in
-  let sessionast = (snd (List.hd sessionast_list)) in
+  let sessionast = Scribble.parse_file (List.hd file_list) in
   let () = debug ("Protocol parsed:\n"^(Prettyprint.print_ast sessionast))
   in
   let (imports,protocols) = match sessionast with Syntax.FileAS (im,pr) -> (im,pr)
