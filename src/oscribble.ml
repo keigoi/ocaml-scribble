@@ -156,7 +156,7 @@ let main () =
       try (
         List.find (function x -> match x with
           | Syntax.Globalast (name,params,role_list,protocol_body)-> name=n
-          | Syntax.Localast (name,params,role_list,protocol_body)-> name=n)
+          | Syntax.Localast (name,_,params,role_list,protocol_body)-> name=n)
           protocols
       ) with Not_found -> 
         (prerr_string ("No protocol named "^n^" has been found.\n");
@@ -188,8 +188,8 @@ let main () =
       let t  = Conversation.localnodetoAST tc in
       let () = debug ("Local type:") in
       (print_string (Prettyprint.print_ast 
-                       (Syntax.FileAS ([],[Syntax.Localast (name,params,role_list,t)]))^"\n"))
-    | (Syntax.Localast (name,params,role_list,protocol_body)), Some Check ->
+                       (Syntax.FileAS ([],[Syntax.Localast (name,role,params,role_list,t)]))^"\n"))
+    | (Syntax.Localast (name,role,params,role_list,protocol_body)), Some Check ->
       let t = Conversation.local_conversion protocol_body in
       let () = debug ("Local type:\n"^(Prettyprint.print_localtype t)) in
       ()
