@@ -145,7 +145,7 @@ let main () =
       in
       let tr = Projection.project role g in
       let () = fulldebug ("Raw local type:\n"^(Prettyprint.print_localtype tr)) in
-      let tc = Projection.clean_local_role tr in
+      let tc = Projection.clean_local_role role tr in
       let () = fulldebug ("Cleaned Local type:") in
       let t  = Conversation.localnodetoAST tc in
       let () = debug ("Local type:") in

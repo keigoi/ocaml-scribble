@@ -53,7 +53,7 @@ let project role g =
   in aux g
 
 
-let clean_local_role t = 
+let clean_local_role myrole t =
   let rec clean_nop subst = function 
     | TEnd n -> TEnd (re_alias subst n) 
     | TGoto n -> TGoto (re_alias subst n)
@@ -90,10 +90,17 @@ let clean_local_role t =
                              aux subst t)
     | TChoice (n,r,tl,TMerge (o,t)) when (List.for_all (function t -> t=TGoto o)tl)
         -> aux ((re_alias subst n,localnodeof t)::subst) t
-    | TChoice (n,r,tl,t) -> TChoice (re_alias subst n,r,
-                                     List.map (function t -> aux subst t) tl,
-                                     aux subst t)
-    | TNop (n,t) -> assert false (* Should have disappeared by now *)
+    | TChoice (n,r,tl,t) ->
+       let tl = List.map (function t -> aux subst t) tl in
+       let r =
+         match tl with
+         | [] -> assert false
+         | TSend (_,_,r,_)::_ -> myrole
+         | TRecv (_,_,r,_)::_ -> r
+         | _ -> assert false
+       in
+       TChoice (re_alias subst n,r,tl,aux subst t)
+    | TNop (n,t) -> assert false (* Shoulpd have disappeared by now *)
     | TJoin (n,t) -> TJoin (re_alias subst n,aux subst t)
     | TMerge (n,t) -> TMerge (re_alias subst n,aux subst t)
     | TInterrupt (n,t,lm) -> TInterrupt (re_alias subst n,aux subst t,lm)
