@@ -6,7 +6,7 @@
 
 open Common
 open ScribbleSyntax
-open Parser
+open ScribbleParser
 
 module LE = Lexing
 

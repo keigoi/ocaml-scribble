@@ -1,11 +1,11 @@
 # OASIS_START
-# DO NOT EDIT (digest: 41c7aabb52d695a38bc2e6b79939fde2)
+# DO NOT EDIT (digest: eb07032192bbe102d9303ed55fd55420)
 Scribble
 ScribbleSyntax
 Common
 Conversation
-Lexer
-Parser
+ScribbleLexer
+ScribbleParser
 Prettyprint
 Projection
 Version

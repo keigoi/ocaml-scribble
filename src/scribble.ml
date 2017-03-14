@@ -16,7 +16,7 @@ let parse_string str =
       let lexbuf = Lexing.from_string str in
       debug "Lexer built" ;
       try 
-           Parser.scribblefile Lexer.token lexbuf
+           ScribbleParser.scribblefile ScribbleLexer.token lexbuf
          with
              ScribbleSyntax.Syntax_error (s,i) ->
 	       (prerr_string ("Syntax error: "^s^" "^(Common.info_to_string i)^"\n");
