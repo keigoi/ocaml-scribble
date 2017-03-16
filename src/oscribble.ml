@@ -137,17 +137,7 @@ let main () =
       in         
       ()
     | (ScribbleSyntax.Globalast (name,params,role_list,protocol_body)), Some (Project role) ->
-      let g = Conversation.global_conversion protocol_body in
-      let () = fulldebug ("Global type:\n"^(Prettyprint.print_globaltype g))
-      in
-      let wf = Wellformedness.check g in
-      let () = debug ("Wellformed: "^(string_of_bool wf))
-      in
-      let tr = Projection.project role g in
-      let () = fulldebug ("Raw local type:\n"^(Prettyprint.print_localtype tr)) in
-      let tc = Projection.clean_local_role role tr in
-      let () = fulldebug ("Cleaned Local type:") in
-      let t  = Conversation.localnodetoAST tc in
+      let t = Scribble.project protocol_body role in
       let () = debug ("Local type:") in
       (print_string (Prettyprint.print_ast 
                        (ScribbleSyntax.FileAS ([],[ScribbleSyntax.Localast (name,role,params,role_list,t)]))^"\n"))

@@ -35,3 +35,17 @@ let parse_file file =
       let () = debug ("Protocols from file "^file^" parsed:\n"^(Prettyprint.print_ast sessionast))
       in
       sessionast
+
+let project protocol_body role =
+      let g = Conversation.global_conversion protocol_body in
+      let () = fulldebug ("Global type:\n"^(Prettyprint.print_globaltype g))
+      in
+      let wf = Wellformedness.check g in
+      let () = debug ("Wellformed: "^(string_of_bool wf))
+      in
+      let tr = Projection.project role g in
+      let () = fulldebug ("Raw local type:\n"^(Prettyprint.print_localtype tr)) in
+      let tc = Projection.clean_local_role role tr in
+      let () = fulldebug ("Cleaned Local type:") in
+      let t  = Conversation.localnodetoAST tc in
+      t
